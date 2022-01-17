@@ -1,31 +1,25 @@
-import requests
-from bs4 import BeautifulSoup
-import re
-inputs = ["https://yoser.org/static/css/footerStyle.css", "https://www.youtube.com/", "https://www.youtube.com/s/desktop/d3411c39/cssbin/www-main-desktop-player-skeleton-rtl.css"]
+from funcs import extractFontFromPage, extractFontFromCSS
+from Excel import Excel
 
-for i in inputs:
-    req = requests.get(i)
-    soup = BeautifulSoup(req.content, "html.parser")
-    fonts = re.findall(r'font-family: (.*?);', soup.prettify())
-    weights = re.findall(r'font-weight: (.*?);', soup.prettify())
-    sizes = re.findall(r'font-size: (.*?);', soup.prettify())
-    print(f"{i} fonts are : ", end=" ")
-    for font in fonts:
-        print(font, end=", ")
-    print()
+fileName = "Font_Example.xlsx"  # Put the excel file name Here
+excel = Excel(fileName)
 
-    print(f"{i} weights are : ", end=" ")
-    for weight in weights:
-        print(weight, end=", ")
-    print()
 
-    print(f"{i} sizes are : ", end=" ")
-    for size in sizes:
-        print(size, end=", ")
+def main():
+    # getting the inputs from the excel object
+    input_urls = excel.getInputs()
 
-    print()
-    print()
-    
+    #for every url in the list: extract the font info then write it to the excel sheet
+    for url in input_urls:
+        font_within_page = extractFontFromPage(url)
+        excel.writeToExcel(False, font_within_page)
+
+        font_within_css = extractFontFromCSS(url)
+        excel.writeToExcel(True, font_within_css)
+
+
+if __name__ == '__main__':
+    main()
 
 # for i in inputs:
 #     req = requests.get(i)
