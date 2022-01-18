@@ -6,10 +6,8 @@ def main():
     fileName = "Font_Example.xlsx"  # Put the excel file name Here
     excel = Excel(fileName)
 
-    # getting the inputs from the excel object
     input_urls = excel.getInputs()
 
-    # for every url in the list: extract the font info then write it to the excel sheet
     for url in input_urls:
         url = url[:len(url)-1] if url[-1] == '/' else url
 

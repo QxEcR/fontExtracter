@@ -62,7 +62,7 @@ def extractFontFamilyFromCSS(url):
         for link in links:
             if "stylesheet" in str(link):
                 font_link = re.findall(r'href="(.*?)"', str(link))
-                if "http" not in font_link[0] and "bootstrap" not in font_link[0]:
+                if "http" not in font_link[0] and "bootstrap" not in font_link[0] and "tailwind" not in font_link[0]:
                     for i in parseCSSForFontFamily(url+font_link[0]):
                         list.append(str(i))
 
