@@ -21,5 +21,7 @@ class Excel:
                     list.append(cell.value)
         return list
 
-    def writeToExcel(self, isCSS, list):
-        pass
+    def writeToExcel(self, url, isCSS, list):
+        for item in list:
+            self.outputSheet.append((url, "CSS" if isCSS else "Non-CSS", item))
+        self.xlsx_file.save(self.filename)
