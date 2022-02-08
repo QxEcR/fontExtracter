@@ -1,7 +1,10 @@
 from funcs import extractFontlinksFromPage, extractFontFamilyFromPage, extractFontFamilyFromCSS
 from Excel import Excel
 
+def anImportantFunction():
+    print("This is an import")
 
+    
 def main():
     fileName = "Font_Example.xlsx"  # Put the excel file name Here
     excel = Excel(fileName)
